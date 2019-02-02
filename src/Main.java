@@ -53,15 +53,31 @@ public class Main {
 		
 		// choose here the algorithm to run
 		run();
-		
-		
 	}
 	
 	void run() {
 		
 	}
 	
-	void analyzeOutput(int sol[]) {
+	void analyzeOutputFiles(File file) {
+		Scanner sc = null;
+		try {
+			sc = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		while (sc.hasNextLine()) {
+			String[] splited = sc.nextLine().split(" ");
+			int[] sol = new int[splited.length];
+			for (int i = 0; i < splited.length; i++) {
+				sol[i] = Integer.valueOf(splited[i]);
+			}
+			System.out.println(analyzeOutput(sol));
+		}
+	}
+	
+	long analyzeOutput(int sol[]) {
 		long score = 0;
 		int[] timeslots = new int[D * T];
 		Arrays.fill(timeslots, 0);
@@ -70,14 +86,14 @@ public class Main {
 			timeslots[s]++;
 			if (s >= D * T) {
 				System.out.println("wrong output: assigned after DT - 1");
-				return;
+				return 0l;
 			}
 		}
 		
 		for (int timeslot : timeslots) {
 			if (timeslot > C) {
 				System.out.println("wrong output: assigned more than C courses to a timeslot");
-				return;
+				return 0l;
 			}
 		}
 		
@@ -112,6 +128,7 @@ public class Main {
 			}
 		}
 		
+		return score;
 	}
 
 	public static void main(String[] args) {
