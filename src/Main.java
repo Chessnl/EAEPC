@@ -127,7 +127,7 @@ public class Main {
 			int cur = keyset[0];
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < ass.get(keyset[i]); j++) {
-					score += rewards[keyset[i] - cur];
+					score += rewards[(keyset[i] - cur) / T];
 					cur = keyset[i];
 				}
 			}
@@ -137,7 +137,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		new Main(0);
+		new Main(3);
 
 	}
 

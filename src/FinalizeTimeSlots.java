@@ -60,7 +60,6 @@ public class FinalizeTimeSlots {
             solution[i] = day * timeSlots + (counter % timeSlots);
             counter++;
         }
-        System.out.println(counter);
     }
 
 
