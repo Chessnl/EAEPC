@@ -36,6 +36,7 @@ public class Main {
 		students = new Student[S];
 		
 		for (int s = 0; s < S; s++) {
+			students[s] = new Student();
 			students[s].i = sc.nextInt();
 			for (int n = 0; n < students[s].i; n++) {
 				students[s].exams[n] = sc.nextInt();
@@ -73,7 +74,7 @@ public class Main {
 		}
 		
 		for (Student stud : students) {
-			
+				
 		}
 	}
  
