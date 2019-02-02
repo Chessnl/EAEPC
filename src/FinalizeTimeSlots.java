@@ -40,11 +40,12 @@ public class FinalizeTimeSlots {
 
 
     private static void assignDayRandom(Set<Integer> assignments, int day, int timeSlots, int maxPerSlot, Exam[] graph) {
-        int maxScore = 0;
+        int maxScore = -10;
         int[][] bestAssigment = new int[0][0];
         for (int i = 0; i < 1000; i++) {
             int[][] assigment = getRandomAssignment(assignments, timeSlots, maxPerSlot);
             int score = analyzeDay(assigment, graph);
+            System.out.println("score: "+ score);
             if (score > maxScore) {
                 bestAssigment = assigment;
             } else {
@@ -55,8 +56,7 @@ public class FinalizeTimeSlots {
 
         for (int i = 0; i < bestAssigment.length; i++) {
             solution[bestAssigment[i][0]] = day*timeSlots + bestAssigment[i][1];
-            System.out.println(day*timeSlots + bestAssigment[i][1]);
-            System.out.println("hey");
+            System.out.println(bestAssigment[i][0] + " " + (day*timeSlots + bestAssigment[i][1]));
         }
 
     }
@@ -67,11 +67,18 @@ public class FinalizeTimeSlots {
         int counter = 0;
         for (Integer i : assignments)  {
             int slot = getRandomSlot(slots, maxPerSlot);
-            assignment[counter][0] = 1;
+            assignment[counter][0] = i;
             assignment[counter][1] = (slot);
             slots[slot]++;
             counter++;
         }
+
+        /* System.out.println("-------------");
+        for (int i = 0; i < assignment.length; i++) {
+            System.out.println(assignment[i][0] + " " + assignment[i][1]);
+        } */
+
+
         return assignment;
     }
 
