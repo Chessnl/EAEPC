@@ -1,8 +1,7 @@
-import javax.jnlp.IntegrationService;
 import java.util.*;
 
 public class BinarySearchStrategy {
-    ArrayList<Set<Integer>> result;
+    ArrayList<Set<Integer>> result = new ArrayList<>();
 
 
     public class EdgeComperator implements Comparator<ExamEdge>{
@@ -52,23 +51,32 @@ public class BinarySearchStrategy {
 
             int examA = edges.get(0).examA;
             int examB = edges.get(0).examB;
+            ArrayList<ExamEdge> removeEdges = new ArrayList<>();
+
 
             for (ExamEdge edge : edges) {
                 if (edge.examA == examA || edge.examB == examA || edge.examA == examB || edge.examB == examB) {
-                    edges.remove(edge);
+                    removeEdges.add(edge);
                 }
+            }
+            for (ExamEdge edge : removeEdges) {
+                edges.remove(edge);
             }
 
             // Put exams in set
+            Exam idA = null;
+            Exam idB = null;
             for (Exam e : exams) {
                 if (e.id == examA) {
                     set1.add(e);
-                    exams.remove(e);
+                    idA = e;
                 } else if (e.id == examB){
                     set2.add(e);
-                    exams.remove(e);
+                    idB = e;
                 }
             }
+            exams.remove(idA);
+            exams.remove(idB);
 
         }
 

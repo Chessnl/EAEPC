@@ -56,6 +56,12 @@ public class Main {
 	}
 	
 	void run() {
+		// BINARY SEARCH STRATEGY
+		Exam[] graph = GraphCreator.createGraph(students, E);
+		BinarySearchStrategy temp = new BinarySearchStrategy();
+		ArrayList<Set<Integer>> result = temp.run(graph, D);
+		int[] finalresult = FinalizeTimeSlots.finalizeSolution(result, T, graph);
+		System.out.println(analyzeOutput(finalresult));
 	}
 	
 	void analyzeOutputFiles(File file) {
