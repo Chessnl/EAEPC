@@ -56,7 +56,7 @@ public class Main {
 	}
 	
 	void run() {
-		
+		GraphCreator.createGraph(students, E);
 	}
 	
 	void analyzeOutputFiles(File file) {
@@ -132,7 +132,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		new Main(1);
+		new Main(0);
 
 	}
 

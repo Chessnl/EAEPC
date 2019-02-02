@@ -1,5 +1,6 @@
 # IntelliJ crap
 .idea/
+out/
 *.iml
 
 # Compiled class file
