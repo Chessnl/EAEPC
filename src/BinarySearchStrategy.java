@@ -41,11 +41,25 @@ public class BinarySearchStrategy {
 
         ArrayList<ExamEdge> edges = new ArrayList<>();
 
+        Set<Integer> examIDs = new HashSet<>();
         for (Exam e : exams) {
+            examIDs.add(e.id);
             for (ExamEdge edge : e.overlap) {
                 edges.add(edge);
             }
         }
+
+        Set<ExamEdge> removeables = new HashSet<>();
+        for (ExamEdge edge : edges) {
+            if (!(examIDs.contains(edge.examA) && examIDs.contains(edge.examB))) {
+                removeables.add(edge);
+            }
+        }
+
+        for (ExamEdge edge : removeables) {
+            edges.remove(edge);
+        }
+
 
         while (edges.size() > 0) {
             Collections.sort(edges, new EdgeComperator());
