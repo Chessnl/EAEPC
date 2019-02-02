@@ -5,8 +5,6 @@ public class Exam {
 
     public Exam(int id, int noExams) {
         this.id = id;
-        for (int i = 0; i < noExams; i++) {
-
-        }
+        this.overlap = new ExamEdge[noExams];
     }
 }
