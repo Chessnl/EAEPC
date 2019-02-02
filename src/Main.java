@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -59,7 +60,7 @@ public class Main {
 		GraphCreator.createGraph(students, E);
 	}
 	
-	void analyzeOutputFiles(File file) {
+	int[] analyzeOutputFiles(File file) {
 		Scanner sc = null;
 		try {
 			sc = new Scanner(file);
@@ -67,14 +68,25 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		int[] bestsol = null;
+		long score = Long.MIN_VALUE;
+		sc.nextLine();
 		while (sc.hasNextLine()) {
 			String[] splited = sc.nextLine().split(" ");
 			int[] sol = new int[splited.length];
 			for (int i = 0; i < splited.length; i++) {
 				sol[i] = Integer.valueOf(splited[i]);
 			}
-			System.out.println(analyzeOutput(sol));
+			long newscore = analyzeOutput(sol);
+			if (newscore > score) {
+				score = newscore;
+				bestsol = sol;
+			}
 		}
+		
+		System.out.println(score);
+		return bestsol;
+		
 	}
 	
 	long analyzeOutput(int sol[]) {
@@ -85,14 +97,14 @@ public class Main {
 		for (int s : sol) {
 			timeslots[s]++;
 			if (s >= D * T) {
-				System.out.println("wrong output: assigned after DT - 1");
+//				System.out.println("wrong output: assigned after DT - 1");
 				return 0l;
 			}
 		}
 		
 		for (int timeslot : timeslots) {
 			if (timeslot > C) {
-				System.out.println("wrong output: assigned more than C courses to a timeslot");
+//				System.out.println("wrong output: assigned more than C courses to a timeslot");
 				return 0l;
 			}
 		}
@@ -122,7 +134,8 @@ public class Main {
 			int cur = keyset[0];
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < ass.get(keyset[i]); j++) {
-					score += rewards[keyset[i] - cur];
+					score += rewards[(keyset[i] - cur) / T];
+					
 					cur = keyset[i];
 				}
 			}
@@ -131,9 +144,43 @@ public class Main {
 		return score;
 	}
 
+	int[] random() {
+		Random random = new Random();
+		int[] sol = new int[E];
+		for (int i = 0; i < E; i++) {
+			sol[i] = random.nextInt(D*T);
+		}
+		return sol;
+	}
+	
 	public static void main(String[] args) {
-		new Main(0);
-
+		Main main = new Main(1);
+//		int[] sol = main.analyzeOutputFiles(new File("output2/laplace.out"));
+//		
+//		for (int i = 0; i < main.E; i++) {
+//			System.out.println(sol[i]);
+//		}
+//		
+//		
+//		
+//		
+		
+		long score = Long.MIN_VALUE;
+		int[] sol = null;
+		
+		for (int x = 0; x < 500000; x++) {
+			int[] solnew = main.random();
+			long scorenew = main.analyzeOutput(solnew);
+			if (scorenew > score) {
+				score = scorenew;
+				sol = solnew;
+			}
+		}
+		
+		System.out.println("score " + score);
+		for (int i = 0; i < main.E; i++) {
+			System.out.println(sol[i]);
+		}
 	}
 
 }
