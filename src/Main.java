@@ -56,7 +56,6 @@ public class Main {
 	}
 	
 	void run() {
-		GraphCreator.createGraph(students, E);
 	}
 	
 	void analyzeOutputFiles(File file) {
