@@ -10,7 +10,7 @@ public class FinalizeTimeSlots {
 
     static int[] solution;
 
-    public static int[] finalizeSolution(ArrayList<Set<Integer>> assignments, int timeSlots, Exam[] exams) {
+    public static int[] finalizeSolution(ArrayList<Set<Integer>> assignments, int timeSlots, Exam[] exams, int maxPerSlot) {
         solution = new int[exams.length];
 
         for (int i = 0; i < assignments.size(); i++) {
@@ -54,10 +54,13 @@ public class FinalizeTimeSlots {
     }
 
     private static void assignDaySimple(Set<Integer> assignments, int day, int timeSlots, Exam[] exams) {
+
         int counter = 0;
         for (Integer i : assignments)  {
             solution[i] = day * timeSlots + (counter % timeSlots);
+            counter++;
         }
+        System.out.println(counter);
     }
 
 

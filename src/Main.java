@@ -60,7 +60,7 @@ public class Main {
 		Exam[] graph = GraphCreator.createGraph(students, E);
 		BinarySearchStrategy temp = new BinarySearchStrategy();
 		ArrayList<Set<Integer>> result = temp.run(graph, D);
-		int[] finalresult = FinalizeTimeSlots.finalizeSolution(result, T, graph);
+		int[] finalresult = FinalizeTimeSlots.finalizeSolution(result, T, graph, C);
 		System.out.println(analyzeOutput(finalresult));
 	}
 	

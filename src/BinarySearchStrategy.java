@@ -33,6 +33,7 @@ public class BinarySearchStrategy {
                 examID.add(e.id);
             }
             result.set(leftDayBoundary, examID);
+            return;
         }
 
         Set<Exam> set1 = new HashSet<>();
